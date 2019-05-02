@@ -1,7 +1,7 @@
 from PIL import Image
 from numpy import *
 from pylab import *
-import stereo
+import stereo.module
 
 im_l = array(Image.open('IMG_2464.jpg').convert('L'),'f')
 im_r = array(Image.open('IMG_2466.jpg').convert('L'),'f')
