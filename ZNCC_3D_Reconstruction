@@ -1,0 +1,34 @@
+from PIL import Image
+from numpy import *
+from pylab import *
+import stereo
+
+im_l = array(Image.open('IMG_2464.jpg').convert('L'),'f')
+im_r = array(Image.open('IMG_2466.jpg').convert('L'),'f')
+
+
+# 視差の開始値と探索範囲
+start = 0
+steps = 350
+
+# 相互相関係数の算出に用いる画素を含むパッチの幅
+wid = 5
+
+#res = stereo.plane_sweep_ncc(im_l,im_r,start,steps,wid)
+
+import scipy.misc
+#scipy.misc.imsave('depth.png',res)
+
+wid = 33
+response = stereo.plane_sweep_gauss(im_l,im_r,start,steps,wid)
+scipy.misc.imsave('order=1.png',response)
+
+#figure()
+#gray()
+#imshow(res)
+#axis('off')
+figure()
+gray()
+imshow(response)
+axis('off')
+show()
